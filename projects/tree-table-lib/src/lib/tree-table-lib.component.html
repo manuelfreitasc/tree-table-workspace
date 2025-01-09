@@ -1,0 +1,160 @@
+<!-- tree-table.component.html -->
+<table class="tree-table">
+  <thead>
+    <tr>
+      <th *ngIf="showCheckbox" class="checkbox-column">
+        <!-- Parent Row  <input type="checkbox">-->#
+      </th>
+      <th
+        *ngFor="let col of columns"
+        [style.width]="col.width"
+        [ngClass]="col.typeHeader"
+      >
+        {{ col.header }}
+      </th>
+      <th *ngIf="showOptions" class="options-column">Opções</th>
+    </tr>
+  </thead>
+  <tbody>
+    <ng-container *ngFor="let row of rows; trackBy: trackByFn">
+      <!-- Parent Row -->
+      <tr class="parent-row">
+        <td *ngIf="showCheckbox" class="checkbox-column">
+          <input
+            type="checkbox"
+            [checked]="row.isSelected"
+            (change)="toggleParentSelection(row)"
+          />
+        </td>
+        <ng-container *ngFor="let col of columns">
+          <td>
+            <ng-container [ngSwitch]="col.type">
+              <!-- Primeira coluna com botão de expandir -->
+              <ng-container *ngSwitchCase="'button'">
+                <button
+                  *ngIf="hasChildren(row)"
+                  class="toggle-button"
+                  (click)="toggleRow(row)"
+                >
+                  {{ row.isExpanded ? "-" : "+" }}
+                </button>
+                {{ getFieldValue(row, col.field) }}
+              </ng-container>
+
+              <!-- Estado com estilo especial -->
+              <ng-container *ngSwitchCase="'estado'">
+                <span class="estado">{{ getFieldValue(row, col.field) }}</span>
+              </ng-container>
+
+              <!-- Moeda formatada -->
+              <ng-container *ngSwitchCase="'currency'">
+                {{ getFieldValue(row, col.field) | number : "1.2-2" }}
+              </ng-container>
+
+              <!-- Valor padrão -->
+              <ng-container *ngSwitchDefault>
+                {{ getFieldValue(row, col.field) }}
+              </ng-container>
+            </ng-container>
+          </td>
+        </ng-container>
+        <td *ngIf="showOptions" class="options-column">
+          <span>Opções</span>
+        </td>
+      </tr>
+
+      <!-- Child Rows -->
+      <ng-container *ngIf="hasChildren(row)">
+        <tr
+          *ngFor="let child of row.children;  index as i"
+          class="child-row"
+          [style.display]="row.isExpanded ? '' : 'none'"
+        >
+          <td *ngIf="showCheckbox" class="checkbox-column">
+            <input
+              type="checkbox"
+              [checked]="child.isSelected"
+              (change)="toggleChildSelection(child, row)"
+            />
+          </td>
+          <ng-container *ngFor="let col of columns">
+            <td>
+              <ng-container [ngSwitch]="col.type">
+                <ng-container *ngSwitchCase="'estado'">
+                  <span class="estado">{{
+                    getFieldValue(child, col.field)
+                  }}</span>
+                </ng-container>
+                <ng-container *ngSwitchCase="'currency'">
+                  {{ getFieldValue(child, col.field) | number : "1.2-2" }}
+                </ng-container>
+                <ng-container *ngSwitchDefault>
+                  {{ getFieldValue(child, col.field) }}
+                </ng-container>
+              </ng-container>
+            </td>
+          </ng-container>
+          <td *ngIf="showOptions" class="options-column">
+            <div
+              [ngStyle]="
+                optionStyle.dropdownContainerStyles
+                  ? optionStyle.dropdownContainerStyles
+                  : defaultStyles.dropdownContainerStyles
+              "
+            >
+              <button
+                (click)="onOptionsClick(child, i)"
+                [ngStyle]="
+                  optionStyle.buttonStyles
+                    ? optionStyle.buttonStyles
+                    : defaultStyles.buttonStyles
+                "
+              >
+                Opções
+              </button>
+
+              <div
+                *ngIf="child.isExpanded"
+                [ngStyle]="
+                  optionStyle.dropdownMenuStyles
+                    ? optionStyle.dropdownMenuStyles
+                    : defaultStyles.dropdownMenuStyles
+                "
+              >
+                <ng-container *ngFor="let opt of options">
+                  <ng-container [ngSwitch]="opt.type">
+                    <ng-container *ngSwitchCase="'link'">
+                      <a
+                        [href]="opt.linkAtts.href || '#'"
+                        [ngStyle]="
+                          optionStyle.dropdownItemStyles
+                            ? optionStyle.dropdownItemStyles
+                            : defaultStyles.dropdownItemStyles
+                        "
+                        >{{ opt.field }}</a
+                      >
+                    </ng-container>
+                    <ng-container *ngSwitchCase="'button'">
+                      <button
+                        (click)="onOptionItemClick(child)"
+                        [attr.data-bs-toggle]="opt.buttonAtts.dataBsToggle || '#'"
+                        [attr.data-bs-target]="opt.buttonAtts.dataBsTarget || '#'"
+                        [ngStyle]="
+                          optionStyle.dropdownItemStyles
+                            ? optionStyle.dropdownItemStyles
+                            : defaultStyles.dropdownItemStyles
+                        "
+                      >
+                        {{ opt.field }}
+                      </button>
+                    </ng-container>
+                  </ng-container>
+                </ng-container>
+              </div>
+            </div>
+          </td>
+        </tr>
+      </ng-container>
+    </ng-container>
+  </tbody>
+</table>

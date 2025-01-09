@@ -17,6 +17,14 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "paths": {
+      "tree-table-lib": [
+        "dist/tree-table-lib"
+      ],
+      "tree-table-lib/*": [
+        "dist/tree-table-lib/*"
+      ]
+    }
   }
 }
