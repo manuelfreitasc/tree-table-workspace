@@ -249,7 +249,7 @@ export class TreeTableLibComponent implements OnInit {
     });
   }
 
-  onOptionItemClick(row: TableRow | TableRowChild, index: number): void {
+  onOptionItemClick(row: TableRow | TableRowChild): void {
     this.onItemClick.emit(row);
   }
 

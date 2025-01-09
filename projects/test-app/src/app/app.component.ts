@@ -1,10 +1,11 @@
-import { TableRowOptions } from "./../../../../dist/tree-table-lib/lib/tree-table-lib.interfaces.d";
+
 // app.component.ts
 import { Component } from "@angular/core";
 import {
   Column,
   TableRow,
   TableRowChild,
+  TableRowOptions,
 } from "projects/tree-table-lib/src/public-api";
 
 @Component({
