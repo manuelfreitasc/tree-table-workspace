@@ -25,7 +25,7 @@ yarn add tree-table
 #### HTML
 
 ```html
-<lib-tree-table
+<tree-table
   [rows]="tableData"
   [columns]="columns"
   [showCheckbox]="true"
@@ -37,7 +37,7 @@ yarn add tree-table
   (rowExpanded)="handleRowExpanded($event)"
   (optionsClicked)="handleOptionsClick($event)"
   (onItemClick)="handleItemClick($event)"
-></lib-tree-table>
+></tree-table>
 
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -66,14 +66,14 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
-import { TreeTableLibModule } from 'projects/tree-table-lib/src/public-api';
+import { TreeTableModule } from 'projects/tree-table/src/public-api';
 
 @NgModule({
   declarations: [
     AppComponent
   ],
   imports: [
-    TreeTableLibModule,
+    TreeTableModule,
     BrowserModule
   ],
   providers: [],

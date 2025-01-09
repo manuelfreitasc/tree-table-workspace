@@ -19,11 +19,11 @@
       "dom"
     ],
     "paths": {
-      "tree-table-lib": [
-        "dist/tree-table-lib"
+      "tree-table": [
+        "dist/tree-table"
       ],
-      "tree-table-lib/*": [
-        "dist/tree-table-lib/*"
+      "tree-table/*": [
+        "dist/tree-table/*"
       ]
     }
   }

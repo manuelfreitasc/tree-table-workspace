@@ -1,5 +1,5 @@
 <!-- projects/test-app/src/app/app.component.html -->
-<lib-tree-table
+<tree-table
 [rows]="tableData"
 [columns]="columns"
 [showCheckbox]="true"
@@ -11,7 +11,7 @@
 (rowExpanded)="onRowExpanded($event)"
 (optionsClicked)="onOptionsClicked($event)"
 (onItemClick)="onItemClick($event)">
-</lib-tree-table>
+</tree-table>
 
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">

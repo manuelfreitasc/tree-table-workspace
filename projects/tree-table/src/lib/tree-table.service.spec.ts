@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { TreeTableLibService } from './tree-table-lib.service';
+import { TreeTableLibService } from './tree-table.service';
 
 describe('TreeTableLibService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));

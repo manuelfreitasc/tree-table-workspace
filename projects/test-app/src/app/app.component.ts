@@ -6,7 +6,7 @@ import {
   TableRow,
   TableRowChild,
   TableRowOptions,
-} from "projects/tree-table-lib/src/public-api";
+} from "projects/tree-table/src/public-api";
 
 @Component({
   selector: "app-root",
